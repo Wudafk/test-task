@@ -1,0 +1,46 @@
+[gd_scene load_steps=8 format=3 uid="uid://d2v4dj4swc4lk"]
+
+[ext_resource type="Script" uid="uid://dkvbl4aco05mw" path="res://addons/Wudafk/Gameplay/multiplayer/Entities/Entity/UI/EntityBarUI3D.gd" id="1_mmc36"]
+[ext_resource type="Script" uid="uid://dn7v2c44qnkku" path="res://addons/Wudafk/Gameplay/multiplayer/Entities/UI/helpers/SubViewportSizeCopy.gd" id="2_k88ya"]
+[ext_resource type="PackedScene" uid="uid://daxd2ch5bdcnp" path="res://addons/Wudafk/Gameplay/multiplayer/Entities/Entity/UI/EntityBarUI.tscn" id="3_mmc36"]
+[ext_resource type="Script" uid="uid://xre0o7ra7k16" path="res://addons/Wudafk/DI/DIContainer.gd" id="4_w6wmw"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_usmrp"]
+viewport_path = NodePath("MeshInstance3D/SubViewport")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_15lmk"]
+resource_local_to_scene = true
+transparency = 1
+shading_mode = 0
+albedo_texture = SubResource("ViewportTexture_usmrp")
+billboard_mode = 1
+billboard_keep_scale = true
+
+[sub_resource type="QuadMesh" id="QuadMesh_15lmk"]
+
+[node name="EntityBarUI3D" type="Node3D" node_paths=PackedStringArray("entity_bar_ui")]
+script = ExtResource("1_mmc36")
+entity_bar_ui = NodePath("MeshInstance3D/SubViewport/EntityBarUI")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.25, 0, 0, 0, 1, 0, 1.75, 0)
+material_override = SubResource("StandardMaterial3D_15lmk")
+mesh = SubResource("QuadMesh_15lmk")
+skeleton = NodePath("../..")
+
+[node name="SubViewport" type="SubViewport" parent="MeshInstance3D" node_paths=PackedStringArray("_target_node", "_mesh_instance_3d")]
+disable_3d = true
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(200, 50)
+render_target_update_mode = 4
+script = ExtResource("2_k88ya")
+_target_node = NodePath("EntityBarUI")
+_mesh_instance_3d = NodePath("..")
+
+[node name="EntityBarUI" parent="MeshInstance3D/SubViewport" instance=ExtResource("3_mmc36")]
+
+[node name="DIContainer" type="Node" parent="." node_paths=PackedStringArray("_instances")]
+script = ExtResource("4_w6wmw")
+_instances = [NodePath("../MeshInstance3D/SubViewport/EntityBarUI")]
+metadata/_custom_type_script = "uid://xre0o7ra7k16"

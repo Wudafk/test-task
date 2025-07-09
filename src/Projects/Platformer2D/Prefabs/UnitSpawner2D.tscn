@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://bhhi0k7esu7sg"]
+
+[ext_resource type="Script" uid="uid://bm3kbb6mhdc5q" path="res://addons/Wudafk/Spawner/UnitSpawner2D.gd" id="1_14vf6"]
+[ext_resource type="PackedScene" uid="uid://bj8peb4bmjbyo" path="res://src/Projects/Platformer2D/Prefabs/Hero2D.tscn" id="2_fnv23"]
+[ext_resource type="Script" uid="uid://xre0o7ra7k16" path="res://addons/Wudafk/DI/DIContainer.gd" id="3_pc6fp"]
+
+[node name="UnitSpawner2D" type="Node2D" node_paths=PackedStringArray("_visualRootContainer", "_spawnPositionContainer")]
+script = ExtResource("1_14vf6")
+unitChunkPrefab = ExtResource("2_fnv23")
+_visualRootContainer = NodePath("ModelContainer")
+_spawnPositionContainer = NodePath("ModelContainer")
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+spawn_path = NodePath("..")
+
+[node name="ModelContainer" type="Node2D" parent="."]
+
+[node name="DIContainer" type="Node" parent="."]
+script = ExtResource("3_pc6fp")
+metadata/_custom_type_script = "uid://xre0o7ra7k16"

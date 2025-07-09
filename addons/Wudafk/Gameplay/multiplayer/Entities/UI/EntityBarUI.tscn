@@ -1,0 +1,127 @@
+[gd_scene load_steps=5 format=3 uid="uid://lkqeeh1iiv5i"]
+
+[ext_resource type="PackedScene" uid="uid://ekg3vibllue0" path="res://addons/Wudafk/Gameplay/multiplayer/Entities/UI/CompositionPrefabs/EntityHealthBarUI.tscn" id="2_u1uwi"]
+[ext_resource type="PackedScene" path="res://src/_addons/Gameplay/multiplayer/Entities/UI/CompositionPrefabs/EntityManaBarUI.tscn" id="3_u1uwi"]
+
+[sub_resource type="GDScript" id="GDScript_3migb"]
+script/source = "class_name EntityBarUI
+
+extends Node
+
+@export var entity_health_bar_ui: EntityHealthBarUI
+@export var entity_mana_bar_ui: EntityHealthBarUI
+@export var hero_name_label: Label
+@export var player_gameplay_data: PlayerGameplayData
+
+func _ready():
+	entity_health_bar_ui.player_gameplay_data = player_gameplay_data
+	entity_mana_bar_ui.player_gameplay_data = player_gameplay_data
+	pass
+	
+func _enter_tree():
+	NetworkTime.before_tick_loop.connect(_gather)
+	pass
+	#if not is_multiplayer_authority():
+		#return
+		
+func _exit_tree():
+	#if not is_multiplayer_authority():
+		#returndwa
+	NetworkTime.before_tick_loop.disconnect(_gather)
+	
+func _gather():
+	hero_name_label.text = player_gameplay_data.hero_name
+"
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_aw3vp"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[node name="EntityBarUI" type="VBoxContainer" node_paths=PackedStringArray("hero_name_label")]
+offset_right = 41.0
+offset_bottom = 28.0
+theme_override_constants/separation = 0
+script = SubResource("GDScript_3migb")
+hero_name_label = NodePath("HeroNameLabel")
+theme_override_constants/separation = 0
+
+[node name="HeroNameLabel" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.580392, 0.835294, 0.662745, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleBoxFlat_aw3vp")
+text = "Nameasdasdasdasdasdasdasdasdasdsa"
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 0
+
+[node name="EntityHealthBarUI" parent="VBoxContainer" instance=ExtResource("2_u1uwi")]
+layout_mode = 2
+
+[node name="EntityManaBarUI" parent="VBoxContainer" instance=ExtResource("3_u1uwi")]
+layout_mode = 2
+
+[node name="VFlowContainer" type="VFlowContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 2
+
+[node name="FlowContainer2" type="FlowContainer" parent="Control"]
+layout_mode = 2
+offset_left = -182.0
+offset_right = -132.0
+offset_bottom = 4.0
+
+[node name="HFlowContainer" type="HFlowContainer" parent="Control/FlowContainer2"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="CenterContainer" type="CenterContainer" parent="Control/FlowContainer2"]
+visible = false
+layout_mode = 2
+
+[node name="FlowContainer2" type="FlowContainer" parent="Control/FlowContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VFlowContainer" type="VFlowContainer" parent="Control/FlowContainer2"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Container" type="Control" parent="Control/FlowContainer2"]
+visible = false
+custom_minimum_size = Vector2(50, 8.5)
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="FlowContainer3" type="FlowContainer" parent="Control"]
+clip_contents = true
+layout_mode = 2
+offset_left = -182.0
+offset_top = 8.0
+offset_right = -132.0
+offset_bottom = 8.0
+size_flags_horizontal = 3
+
+[node name="FlowContainer" type="FlowContainer" parent="Control"]
+visible = false
+layout_mode = 2
+offset_left = -159.0
+offset_right = -4.0
+offset_bottom = 8.0
+size_flags_horizontal = 3
+
+[node name="ItemList" type="ItemList" parent="Control/FlowContainer"]
+custom_minimum_size = Vector2(50, 8.5)
+layout_mode = 2
+size_flags_horizontal = 3

@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=3 uid="uid://7eqp4m6amcqa"]
+
+[ext_resource type="Script" uid="uid://cbvmvnki1jl7g" path="res://addons/Wudafk/GameCamera/ObserverCamera2D.gd" id="1_knv72"]
+
+[node name="ObserverCamera2D" type="Node2D" node_paths=PackedStringArray("camera_mount", "camera_2d_node")]
+position = Vector2(0, 1)
+script = ExtResource("1_knv72")
+camera_mount = NodePath(".")
+camera_2d_node = NodePath("Camera2D")
+zoom_level = 2.0
+limit_left = -1000000
+limit_top = -1000000
+limit_right = 1000000
+limit_bottom = 1000000
+
+[node name="Camera2D" type="Camera2D" parent="."]
+process_callback = 0
+position_smoothing_enabled = true
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+editor_draw_drag_margin = true

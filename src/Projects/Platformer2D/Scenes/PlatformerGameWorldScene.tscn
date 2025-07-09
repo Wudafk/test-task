@@ -1,0 +1,344 @@
+[gd_scene load_steps=23 format=4 uid="uid://dxgajt5ydsxxi"]
+
+[ext_resource type="Script" uid="uid://84savypq1iap" path="res://addons/Wudafk/World/World.gd" id="1_l2ata"]
+[ext_resource type="Script" uid="uid://bfamf1wki5he3" path="res://addons/Wudafk/UI/UIManager.gd" id="2_i8osw"]
+[ext_resource type="Script" uid="uid://xre0o7ra7k16" path="res://addons/Wudafk/DI/DIContainer.gd" id="3_lqa37"]
+[ext_resource type="PackedScene" uid="uid://cx381k58mw352" path="res://src/Projects/Platformer2D/UI/ScoreUI.tscn" id="3_ssba1"]
+[ext_resource type="Script" uid="uid://cp8vv712f6kiw" path="res://addons/Wudafk/World/WorldDependencyFactory.gd" id="3_y5pkp"]
+[ext_resource type="PackedScene" uid="uid://bj8peb4bmjbyo" path="res://src/Projects/Platformer2D/Prefabs/Hero2D.tscn" id="5_5vk3q"]
+[ext_resource type="Script" uid="uid://b705j4ctujopa" path="res://addons/Wudafk/GameCamera/GameCameraController.gd" id="6_0rerr"]
+[ext_resource type="Script" uid="uid://cr11jnuwnwomp" path="res://addons/Wudafk/Gameplay/multiplayer/Entities/Unit/PlayerUnitsManager.gd" id="6_i8osw"]
+[ext_resource type="PackedScene" uid="uid://7eqp4m6amcqa" path="res://addons/Wudafk/GameCamera/ObserverCamera2D.tscn" id="7_5vk3q"]
+[ext_resource type="Script" uid="uid://dioa5y1mr4j30" path="res://addons/Wudafk/Gameplay/multiplayer/Entities/Unit/UnitInputController.gd" id="9_1yplo"]
+[ext_resource type="PackedScene" uid="uid://bhhi0k7esu7sg" path="res://src/Projects/Platformer2D/Prefabs/UnitSpawner2D.tscn" id="9_5c5cc"]
+[ext_resource type="Texture2D" uid="uid://c7iwdl6tq05nt" path="res://src/Projects/Platformer2D/assets/tiles_1.png" id="9_136l0"]
+[ext_resource type="PackedScene" uid="uid://7m1mlhrufdxi" path="res://src/Projects/Platformer2D/Prefabs/Unit2D.tscn" id="10_rymjj"]
+[ext_resource type="Script" uid="uid://brool5r0ugoaa" path="res://addons/Wudafk/Gameplay/RPGDamageManager.gd" id="11_ef1x3"]
+[ext_resource type="Script" uid="uid://002350slro71" path="res://src/Projects/Platformer2D/Game/FinishGameDetector.gd" id="13_1u6a2"]
+[ext_resource type="Script" uid="uid://bha3gtplktjfc" path="res://src/Projects/Platformer2D/Game/RestartGameManager.gd" id="13_ssba1"]
+[ext_resource type="Script" uid="uid://tvxljvinfeeb" path="res://src/Projects/Platformer2D/Game/PlayerKillCounter.gd" id="15_pl6b8"]
+[ext_resource type="Script" uid="uid://1n0oyu8encvh" path="res://src/Projects/Platformer2D/Game/DeathZoneDetector.gd" id="18_ynx76"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5c5cc"]
+texture = ExtResource("9_136l0")
+0:0/0 = 0
+0:0/0/terrain_set = 0
+0:0/0/terrain = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, -8, -4.00636, 8, -3.98063, 8, -8)
+0:0/0/physics_layer_0/polygon_0/one_way = true
+0:0/0/terrains_peering_bit/right_side = 0
+0:0/0/terrains_peering_bit/bottom_right_corner = 0
+0:0/0/terrains_peering_bit/bottom_side = 0
+1:0/0 = 0
+1:0/0/terrain_set = 0
+1:0/0/terrain = 0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, -8, -3.75905, 8, -3.66013, 8, -8)
+1:0/0/terrains_peering_bit/right_side = 0
+1:0/0/terrains_peering_bit/bottom_right_corner = 0
+1:0/0/terrains_peering_bit/bottom_side = 0
+1:0/0/terrains_peering_bit/bottom_left_corner = 0
+1:0/0/terrains_peering_bit/left_side = 0
+2:0/0 = 0
+2:0/0/terrain_set = 0
+2:0/0/terrain = 0
+2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, -8, -3.75905, 8, -3.66013, 8, -8)
+2:0/0/terrains_peering_bit/bottom_side = 0
+2:0/0/terrains_peering_bit/bottom_left_corner = 0
+2:0/0/terrains_peering_bit/left_side = 0
+3:0/0 = 0
+3:0/0/terrain_set = 0
+3:0/0/terrain = 0
+3:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, -8, -3.75905, 8, -3.66013, 8, -8)
+3:0/0/terrains_peering_bit/bottom_side = 0
+4:0/0 = 0
+4:0/0/terrain_set = 0
+4:0/0/terrain = 0
+4:0/0/terrains_peering_bit/right_side = 0
+4:0/0/terrains_peering_bit/bottom_side = 0
+4:0/0/terrains_peering_bit/bottom_left_corner = 0
+4:0/0/terrains_peering_bit/left_side = 0
+4:0/0/terrains_peering_bit/top_left_corner = 0
+4:0/0/terrains_peering_bit/top_side = 0
+4:0/0/terrains_peering_bit/top_right_corner = 0
+5:0/0 = 0
+5:0/0/terrain_set = 0
+5:0/0/terrain = 0
+5:0/0/terrains_peering_bit/right_side = 0
+5:0/0/terrains_peering_bit/bottom_right_corner = 0
+5:0/0/terrains_peering_bit/bottom_side = 0
+5:0/0/terrains_peering_bit/left_side = 0
+5:0/0/terrains_peering_bit/top_left_corner = 0
+5:0/0/terrains_peering_bit/top_side = 0
+5:0/0/terrains_peering_bit/top_right_corner = 0
+0:1/0 = 0
+0:1/0/terrain_set = 0
+0:1/0/terrain = 0
+0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, -8, -3.75905, 8, -3.66013, 8, -8)
+0:1/0/terrains_peering_bit/right_side = 0
+0:1/0/terrains_peering_bit/bottom_right_corner = 0
+0:1/0/terrains_peering_bit/bottom_side = 0
+0:1/0/terrains_peering_bit/top_side = 0
+0:1/0/terrains_peering_bit/top_right_corner = 0
+1:1/0 = 0
+1:1/0/terrain_set = 0
+1:1/0/terrain = 0
+1:1/0/terrains_peering_bit/right_side = 0
+1:1/0/terrains_peering_bit/bottom_right_corner = 0
+1:1/0/terrains_peering_bit/bottom_side = 0
+1:1/0/terrains_peering_bit/bottom_left_corner = 0
+1:1/0/terrains_peering_bit/left_side = 0
+1:1/0/terrains_peering_bit/top_left_corner = 0
+1:1/0/terrains_peering_bit/top_side = 0
+1:1/0/terrains_peering_bit/top_right_corner = 0
+2:1/0 = 0
+2:1/0/terrain_set = 0
+2:1/0/terrain = 0
+2:1/0/terrains_peering_bit/bottom_side = 0
+2:1/0/terrains_peering_bit/bottom_left_corner = 0
+2:1/0/terrains_peering_bit/left_side = 0
+2:1/0/terrains_peering_bit/top_left_corner = 0
+2:1/0/terrains_peering_bit/top_side = 0
+3:1/0 = 0
+3:1/0/terrain_set = 0
+3:1/0/terrain = 0
+3:1/0/terrains_peering_bit/bottom_side = 0
+3:1/0/terrains_peering_bit/top_side = 0
+4:1/0 = 0
+4:1/0/terrain_set = 0
+4:1/0/terrain = 0
+4:1/0/terrains_peering_bit/right_side = 0
+4:1/0/terrains_peering_bit/bottom_right_corner = 0
+4:1/0/terrains_peering_bit/bottom_side = 0
+4:1/0/terrains_peering_bit/bottom_left_corner = 0
+4:1/0/terrains_peering_bit/left_side = 0
+4:1/0/terrains_peering_bit/top_left_corner = 0
+4:1/0/terrains_peering_bit/top_side = 0
+5:1/0 = 0
+5:1/0/terrain_set = 0
+5:1/0/terrain = 0
+5:1/0/terrains_peering_bit/right_side = 0
+5:1/0/terrains_peering_bit/bottom_right_corner = 0
+5:1/0/terrains_peering_bit/bottom_side = 0
+5:1/0/terrains_peering_bit/bottom_left_corner = 0
+5:1/0/terrains_peering_bit/left_side = 0
+5:1/0/terrains_peering_bit/top_side = 0
+5:1/0/terrains_peering_bit/top_right_corner = 0
+0:2/0 = 0
+0:2/0/terrain_set = 0
+0:2/0/terrain = 0
+0:2/0/terrains_peering_bit/right_side = 0
+0:2/0/terrains_peering_bit/top_side = 0
+0:2/0/terrains_peering_bit/top_right_corner = 0
+1:2/0 = 0
+1:2/0/terrain_set = 0
+1:2/0/terrain = 0
+1:2/0/terrains_peering_bit/right_side = 0
+1:2/0/terrains_peering_bit/left_side = 0
+1:2/0/terrains_peering_bit/top_left_corner = 0
+1:2/0/terrains_peering_bit/top_side = 0
+1:2/0/terrains_peering_bit/top_right_corner = 0
+2:2/0 = 0
+2:2/0/terrain_set = 0
+2:2/0/terrain = 0
+2:2/0/terrains_peering_bit/left_side = 0
+2:2/0/terrains_peering_bit/top_left_corner = 0
+2:2/0/terrains_peering_bit/top_side = 0
+3:2/0 = 0
+3:2/0/terrain_set = 0
+3:2/0/terrain = 0
+3:2/0/terrains_peering_bit/top_side = 0
+0:3/0 = 0
+0:3/0/terrain_set = 0
+0:3/0/terrain = 0
+0:3/0/terrains_peering_bit/right_side = 0
+1:3/0 = 0
+1:3/0/terrain_set = 0
+1:3/0/terrain = 0
+1:3/0/terrains_peering_bit/right_side = 0
+1:3/0/terrains_peering_bit/left_side = 0
+2:3/0 = 0
+2:3/0/terrain_set = 0
+2:3/0/terrain = 0
+2:3/0/terrains_peering_bit/left_side = 0
+3:3/0 = 0
+3:3/0/terrain_set = 0
+3:3/0/terrain = 0
+0:4/0 = 0
+0:4/0/terrain_set = 0
+0:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, -8, -3.75509, 8, -3.66013, 8, -8)
+0:4/0/physics_layer_0/polygon_0/one_way = true
+1:4/0 = 0
+1:4/0/terrain_set = 0
+1:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, -8, -3.5612, 8, -3.46228, 8, -8)
+1:4/0/physics_layer_0/polygon_0/one_way = true
+2:4/0 = 0
+2:4/0/terrain_set = 0
+2:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, -8, -3.36336, 8, -3.46228, 8, -8)
+2:4/0/physics_layer_0/polygon_0/one_way = true
+3:4/0 = 0
+3:4/0/terrain_set = 0
+4:4/0 = 0
+5:4/0 = 0
+0:5/0 = 0
+1:5/0 = 0
+2:5/0 = 0
+3:5/0 = 0
+4:5/0 = 0
+5:5/0 = 0
+0:6/0 = 0
+1:6/0 = 0
+2:6/0 = 0
+3:6/0 = 0
+0:7/0 = 0
+1:7/0 = 0
+2:7/0 = 0
+3:7/0 = 0
+5:3/0 = 0
+4:6/0 = 0
+5:6/0 = 0
+5:7/0 = 0
+4:7/0 = 0
+4:2/0 = 0
+4:3/0 = 0
+5:2/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_rymjj"]
+occlusion_layer_0/light_mask = 1
+physics_layer_0/collision_layer = 32768
+physics_layer_0/collision_mask = 32769
+terrain_set_0/mode = 0
+terrain_set_0/terrain_0/name = "OneWayGround"
+terrain_set_0/terrain_0/color = Color(0, 0.455402, 0.331794, 1)
+terrain_set_0/terrain_1/name = "Ground"
+terrain_set_0/terrain_1/color = Color(0.5, 0.4375, 0.25, 1)
+sources/0 = SubResource("TileSetAtlasSource_5c5cc")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ef1x3"]
+radius = 51.97
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m7vyy"]
+size = Vector2(3453, 276)
+
+[node name="PlatformerGameWorldScene" type="Node2D" node_paths=PackedStringArray("_playerUnitsManager", "_playerCameraController", "_playerUnitInputController", "_worldDependencyFactory", "_diContainer")]
+script = ExtResource("1_l2ata")
+_playerUnitsManager = NodePath("System/PlayerUnitsManager")
+_playerCameraController = NodePath("System/PlayerCameraController")
+_playerUnitInputController = NodePath("System/PlayerUnitInputController")
+_worldDependencyFactory = NodePath("DIContainer/WorldDependencyFactory")
+_diContainer = NodePath("DIContainer")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="UIManager" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_i8osw")
+metadata/_custom_type_script = "uid://bfamf1wki5he3"
+
+[node name="ScoreUI" parent="CanvasLayer/UIManager" instance=ExtResource("3_ssba1")]
+layout_mode = 1
+
+[node name="DIContainer" type="Node" parent="." node_paths=PackedStringArray("_instances")]
+script = ExtResource("3_lqa37")
+_instances = [NodePath("../System/UnitSpawner2D"), NodePath("../System/RPGDamageManager"), NodePath("../System/RestartGameManager"), NodePath("../System/PlayerKillCounter"), NodePath("../CanvasLayer/UIManager"), NodePath("../CanvasLayer/UIManager/ScoreUI"), NodePath("../FinishGameArea2D"), NodePath("../DeathZoneArea2D")]
+metadata/_custom_type_script = "uid://xre0o7ra7k16"
+
+[node name="WorldDependencyFactory" type="Node" parent="DIContainer"]
+script = ExtResource("3_y5pkp")
+
+[node name="System" type="Node2D" parent="."]
+
+[node name="PlayerUnitsManager" type="Node2D" parent="System"]
+script = ExtResource("6_i8osw")
+_unitPrefab = ExtResource("5_5vk3q")
+
+[node name="PlayerUnitInputController" type="Node" parent="System"]
+script = ExtResource("9_1yplo")
+
+[node name="PlayerCameraController" type="Node2D" parent="System"]
+script = ExtResource("6_0rerr")
+_cameraPrefab = ExtResource("7_5vk3q")
+
+[node name="UnitSpawner2D" parent="System" instance=ExtResource("9_5c5cc")]
+position = Vector2(60, -120)
+unitChunkPrefab = ExtResource("10_rymjj")
+
+[node name="RPGDamageManager" type="Node" parent="System"]
+script = ExtResource("11_ef1x3")
+metadata/_custom_type_script = "uid://brool5r0ugoaa"
+
+[node name="RestartGameManager" type="Node" parent="System"]
+script = ExtResource("13_ssba1")
+metadata/_custom_type_script = "uid://bha3gtplktjfc"
+
+[node name="PlayerKillCounter" type="Node" parent="System"]
+script = ExtResource("15_pl6b8")
+metadata/_custom_type_script = "uid://tvxljvinfeeb"
+
+[node name="TileMapLayerBack" type="TileMapLayer" parent="."]
+z_index = -2
+position = Vector2(1, 0)
+tile_map_data = PackedByteArray("AAD+/wAAAAABAAUAAAD//wAAAAACAAUAAAD///7/AAACAAUAAAD9//7/AAAAAAUAAAD9////AAAAAAUAAAD9/wAAAAAAAAUAAAD/////AAACAAUAAAD+//7/AAABAAUAAAD+////AAABAAUAAAD9//z/AAAAAAUAAAD9//3/AAAAAAUAAAD+//z/AAABAAUAAAD+//3/AAABAAUAAAD///z/AAACAAUAAAD///3/AAACAAUAAAD9//v/AAAAAAQAAAD+//v/AAABAAQAAAD///v/AAACAAQAAAA=")
+tile_set = SubResource("TileSet_rymjj")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+z_index = -1
+position = Vector2(1, 0)
+tile_map_data = PackedByteArray("AAD8/wAAAAABAAAAAAD9/wAAAAABAAAAAAD+/wAAAAABAAAAAAD//wAAAAABAAAAAAD7/wAAAAABAAAAAAAAAAAAAAABAAAAAAD7/wEAAAABAAEAAAD7/wIAAAABAAIAAAAAAAEAAAABAAEAAAAAAAIAAAABAAIAAAD8/wIAAAABAAIAAAD9/wIAAAABAAIAAAD+/wIAAAABAAIAAAD//wIAAAABAAIAAAD//wEAAAABAAEAAAD+/wEAAAABAAEAAAD9/wEAAAABAAEAAAD8/wEAAAABAAEAAAAGAAAAAAABAAAAAAAGAAEAAAABAAEAAAAHAAAAAAABAAAAAAAHAAEAAAABAAEAAAAIAAAAAAABAAAAAAAIAAEAAAABAAEAAAAJAAAAAAABAAAAAAAJAAEAAAABAAEAAAAKAAAAAAABAAAAAAAKAAEAAAABAAEAAAALAAAAAAACAAAAAAALAAEAAAACAAEAAAADAAEAAAABAAEAAAADAAAAAAABAAAAAAAOAAAAAAAAAAAAAAAQAAAAAAABAAAAAAAPAAAAAAABAAAAAAAPAAEAAAABAAIAAAAOAAEAAAAAAAIAAAAQAAEAAAABAAIAAAD6/wAAAAABAAAAAADx/wAAAAAAAAAAAADy/wAAAAABAAAAAADz/wAAAAABAAAAAAD0/wAAAAABAAAAAAD1/wAAAAABAAAAAAD2/wAAAAABAAAAAAD3/wAAAAABAAAAAAD4/wAAAAABAAAAAAD5/wAAAAABAAAAAADy/wEAAAABAAEAAADz/wEAAAABAAEAAAD0/wEAAAABAAEAAAD1/wEAAAABAAEAAAD2/wEAAAABAAEAAAD3/wEAAAABAAEAAAD4/wEAAAABAAEAAAD5/wEAAAABAAEAAAD6/wEAAAABAAEAAADx/wEAAAAAAAEAAADx/wIAAAAAAAIAAADy/wIAAAABAAIAAADz/wIAAAABAAIAAAD0/wIAAAABAAIAAAD1/wIAAAABAAIAAAD2/wIAAAABAAIAAAD3/wIAAAABAAIAAAD4/wIAAAABAAIAAAD5/wIAAAABAAIAAAD6/wIAAAABAAIAAAABAAAAAAABAAAAAAACAAAAAAABAAAAAAAEAAAAAAABAAAAAAAFAAAAAAABAAAAAAABAAEAAAABAAEAAAACAAEAAAABAAEAAAAEAAEAAAABAAEAAAAFAAEAAAABAAEAAAALAAIAAAACAAIAAAAKAAIAAAABAAIAAAAJAAIAAAABAAIAAAAIAAIAAAABAAIAAAAHAAIAAAABAAIAAAAGAAIAAAABAAIAAAAFAAIAAAABAAIAAAAEAAIAAAABAAIAAAADAAIAAAABAAIAAAACAAIAAAABAAIAAAABAAIAAAABAAIAAAAAAPn/AAAAAAAAAAAAAPr/AAAAAAEAAAAAAPv/AAAAAAIAAAABAPn/AAABAAAAAAABAPr/AAABAAEAAAABAPv/AAABAAIAAAACAPn/AAABAAAAAAACAPr/AAABAAEAAAACAPv/AAABAAIAAAADAPn/AAABAAAAAAAEAPn/AAABAAAAAAAFAPn/AAABAAAAAAAGAPn/AAABAAAAAAAHAPn/AAABAAAAAAAIAPn/AAABAAAAAAAJAPn/AAABAAAAAAAKAPn/AAABAAAAAAALAPn/AAABAAAAAAAMAPn/AAABAAAAAAANAPn/AAABAAAAAAAOAPn/AAABAAAAAAAPAPn/AAABAAAAAAAQAPn/AAACAAAAAAADAPv/AAABAAIAAAAEAPv/AAABAAIAAAAFAPv/AAABAAIAAAAGAPv/AAABAAIAAAAHAPv/AAABAAIAAAAIAPv/AAABAAIAAAAJAPv/AAABAAIAAAAKAPv/AAABAAIAAAALAPv/AAABAAIAAAAMAPv/AAABAAIAAAANAPv/AAABAAIAAAAOAPv/AAABAAIAAAAPAPv/AAABAAIAAAAQAPv/AAACAAIAAAAQAPr/AAACAAEAAAAPAPr/AAABAAEAAAAOAPr/AAABAAEAAAANAPr/AAABAAEAAAAMAPr/AAABAAEAAAALAPr/AAABAAEAAAAKAPr/AAABAAEAAAAJAPr/AAABAAEAAAAIAPr/AAABAAEAAAAHAPr/AAABAAEAAAAGAPr/AAABAAEAAAAFAPr/AAABAAEAAAAEAPr/AAABAAEAAAADAPr/AAABAAEAAAARAAAAAAABAAAAAAASAAAAAAABAAAAAAATAAAAAAABAAAAAAAUAAAAAAACAAAAAAAUAAEAAAACAAIAAAATAAEAAAABAAIAAAASAAEAAAABAAIAAAARAAEAAAABAAIAAAA=")
+tile_set = SubResource("TileSet_rymjj")
+
+[node name="FinishGameArea2D" type="Area2D" parent="."]
+position = Vector2(281, 0)
+script = ExtResource("13_1u6a2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FinishGameArea2D"]
+shape = SubResource("CircleShape2D_ef1x3")
+
+[node name="Label" type="Label" parent="FinishGameArea2D"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -45.0
+offset_top = -31.0
+offset_right = 45.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/outline_size = 4
+text = "Финиш тут"
+horizontal_alignment = 1
+
+[node name="DeathZoneArea2D" type="Area2D" parent="."]
+position = Vector2(0, 100)
+script = ExtResource("18_ynx76")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DeathZoneArea2D"]
+position = Vector2(180.5, 105)
+shape = SubResource("RectangleShape2D_m7vyy")
+
+[node name="Label" type="Label" parent="DeathZoneArea2D"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -45.0
+offset_top = -31.0
+offset_right = 45.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/outline_size = 4
+text = "Внизу зона смерти"
+horizontal_alignment = 1
+
+[connection signal="body_entered" from="FinishGameArea2D" to="FinishGameArea2D" method="_on_body_entered"]
+[connection signal="body_exited" from="FinishGameArea2D" to="FinishGameArea2D" method="_on_body_exited"]
+[connection signal="body_entered" from="DeathZoneArea2D" to="DeathZoneArea2D" method="_on_body_entered"]
+[connection signal="body_exited" from="DeathZoneArea2D" to="DeathZoneArea2D" method="_on_body_exited"]

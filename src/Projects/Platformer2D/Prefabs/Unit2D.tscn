@@ -1,0 +1,68 @@
+[gd_scene load_steps=13 format=3 uid="uid://7m1mlhrufdxi"]
+
+[ext_resource type="Script" uid="uid://dxsnpl34m1nck" path="res://addons/Wudafk/Gameplay/multiplayer/Entities/Unit/Unit.gd" id="1_xsdt4"]
+[ext_resource type="PackedScene" uid="uid://d0cx87hcgp6ng" path="res://src/Projects/Platformer2D/Prefabs/UnitAspects/UnitPhysics2D.tscn" id="2_osw4v"]
+[ext_resource type="PackedScene" uid="uid://cnbr84mw5royv" path="res://src/Projects/Platformer2D/Prefabs/UnitAspects/UnitVisual2D.tscn" id="3_1nyc2"]
+[ext_resource type="Script" uid="uid://xre0o7ra7k16" path="res://addons/Wudafk/DI/DIContainer.gd" id="5_lt0ms"]
+[ext_resource type="Script" uid="uid://b1ltj5682x2vw" path="res://addons/Wudafk/Single/SingleRollbackSynchronizer.gd" id="10_ur5qx"]
+[ext_resource type="Script" uid="uid://dgq7bl53wpjik" path="res://addons/Wudafk/Gameplay/UnitDamageTaker.gd" id="12_6xbb2"]
+[ext_resource type="Script" uid="uid://bi0cklkxy6k7p" path="res://addons/Wudafk/Gameplay/UnitDamageDealer.gd" id="95_xsdt4"]
+[ext_resource type="PackedScene" uid="uid://dg1lv5r7s55ad" path="res://src/Projects/Platformer2D/Prefabs/UnitAspects/UnitUI2D.tscn" id="97_bu5gi"]
+[ext_resource type="Script" uid="uid://b4hcva6h12qqp" path="res://src/Projects/Platformer2D/BotAI/EnemyBotAI2D.gd" id="98_u26xo"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ggtbe"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_by1jr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u26xo"]
+size = Vector2(150, 50)
+
+[node name="Unit2D" type="CharacterBody2D"]
+collision_mask = 32769
+script = ExtResource("1_xsdt4")
+
+[node name="Physics" parent="." instance=ExtResource("2_osw4v")]
+
+[node name="AttackState" parent="Physics/RewindableStateMachine" index="5"]
+attack_duration = 0.5
+
+[node name="Visual" parent="." instance=ExtResource("3_1nyc2")]
+
+[node name="SingleRollbackSynchronizer" type="Node" parent="." node_paths=PackedStringArray("root")]
+script = ExtResource("10_ur5qx")
+root = NodePath("..")
+metadata/_custom_type_script = "uid://b1ltj5682x2vw"
+
+[node name="DIContainer" type="Node" parent="." node_paths=PackedStringArray("_instances")]
+script = ExtResource("5_lt0ms")
+_instances = [NodePath("../Physics"), NodePath("../Visual"), NodePath("../UnitDamageDealer"), NodePath("../UnitDamageTaker"), NodePath("../UnitUI"), NodePath("../EnemyBotAI2D2"), NodePath("../SingleRollbackSynchronizer")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -15)
+shape = SubResource("CapsuleShape2D_ggtbe")
+
+[node name="UnitDamageDealer" type="Node" parent="."]
+script = ExtResource("95_xsdt4")
+metadata/_custom_type_script = "uid://bi0cklkxy6k7p"
+
+[node name="UnitDamageTaker" type="Node" parent="."]
+script = ExtResource("12_6xbb2")
+metadata/_custom_type_script = "uid://dgq7bl53wpjik"
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_by1jr")
+
+[node name="UnitUI" parent="." instance=ExtResource("97_bu5gi")]
+position = Vector2(0, -80)
+
+[node name="EnemyBotAI2D2" type="Node2D" parent="." node_paths=PackedStringArray("_followTargetArea")]
+script = ExtResource("98_u26xo")
+_followTargetArea = NodePath("FollowTargetArea2D")
+
+[node name="FollowTargetArea2D" type="Area2D" parent="EnemyBotAI2D2"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyBotAI2D2/FollowTargetArea2D"]
+position = Vector2(0, -25)
+shape = SubResource("RectangleShape2D_u26xo")
+
+[editable path="Physics"]

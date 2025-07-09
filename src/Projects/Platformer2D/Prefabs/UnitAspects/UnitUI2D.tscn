@@ -1,0 +1,59 @@
+[gd_scene load_steps=8 format=3 uid="uid://dg1lv5r7s55ad"]
+
+[ext_resource type="Script" uid="uid://xre0o7ra7k16" path="res://addons/Wudafk/DI/DIContainer.gd" id="1_f4xip"]
+[ext_resource type="Script" uid="uid://dkvbl4aco05mw" path="res://addons/Wudafk/Gameplay/multiplayer/Entities/Entity/UI/EntityBarUI3D.gd" id="2_2dui2"]
+[ext_resource type="Script" uid="uid://dn7v2c44qnkku" path="res://addons/Wudafk/Gameplay/multiplayer/Entities/UI/helpers/SubViewportSizeCopy.gd" id="3_g2tj4"]
+[ext_resource type="PackedScene" uid="uid://daxd2ch5bdcnp" path="res://addons/Wudafk/Gameplay/multiplayer/Entities/Entity/UI/EntityBarUI.tscn" id="4_i2wl3"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_5onoh"]
+viewport_path = NodePath("EnemyEntityBarUI2D/SubViewport")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a6mb7"]
+resource_local_to_scene = true
+transparency = 1
+shading_mode = 0
+albedo_texture = SubResource("ViewportTexture_5onoh")
+billboard_mode = 1
+billboard_keep_scale = true
+
+[sub_resource type="QuadMesh" id="QuadMesh_15lmk"]
+
+[node name="UnitUI2D" type="Node2D"]
+
+[node name="DIContainer" type="Node" parent="." node_paths=PackedStringArray("_instances")]
+script = ExtResource("1_f4xip")
+_instances = [NodePath("../EnemyEntityBarUI2D")]
+
+[node name="EnemyEntityBarUI2D" type="Node2D" parent="." node_paths=PackedStringArray("entity_bar_ui")]
+script = ExtResource("2_2dui2")
+entity_bar_ui = NodePath("EntityBarUI")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="EnemyEntityBarUI2D"]
+transform = Transform3D(1, 0, 0, 0, 0.25, 0, 0, 0, 1, 0, 1.75, 0)
+visible = false
+material_override = SubResource("StandardMaterial3D_a6mb7")
+mesh = SubResource("QuadMesh_15lmk")
+skeleton = NodePath("../..")
+
+[node name="DIContainer" type="Node" parent="EnemyEntityBarUI2D" node_paths=PackedStringArray("_instances")]
+script = ExtResource("1_f4xip")
+_instances = [NodePath("../EntityBarUI")]
+metadata/_custom_type_script = "uid://xre0o7ra7k16"
+
+[node name="SubViewport" type="SubViewport" parent="EnemyEntityBarUI2D" node_paths=PackedStringArray("_target_node", "_mesh_instance_3d")]
+disable_3d = true
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(200, 50)
+render_target_update_mode = 4
+script = ExtResource("3_g2tj4")
+_target_node = NodePath("../EntityBarUI")
+_mesh_instance_3d = NodePath("../MeshInstance3D")
+
+[node name="EntityBarUI" parent="EnemyEntityBarUI2D" instance=ExtResource("4_i2wl3")]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -36.0
+offset_right = 36.0
+grow_horizontal = 2

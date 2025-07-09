@@ -1,0 +1,38 @@
+[gd_scene load_steps=4 format=3 uid="uid://ekg3vibllue0"]
+
+[ext_resource type="Script" uid="uid://cbdthxprgmbtx" path="res://addons/Wudafk/Gameplay/multiplayer/Entities/UI/CompositionPrefabs/EntityHealthBarUI.gd" id="1_unhk1"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2kv0f"]
+bg_color = Color(0, 0, 0, 0.870588)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+border_blend = true
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dfn1v"]
+bg_color = Color(0.737255, 0.321569, 0.227451, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+border_blend = true
+
+[node name="EntityHealthBarUI" type="PanelContainer" node_paths=PackedStringArray("health")]
+offset_right = 30.0
+offset_bottom = 5.0
+size_flags_horizontal = 3
+script = ExtResource("1_unhk1")
+health = NodePath("Health")
+
+[node name="Health" type="ProgressBar" parent="."]
+custom_minimum_size = Vector2(0, 5)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/background = SubResource("StyleBoxFlat_2kv0f")
+theme_override_styles/fill = SubResource("StyleBoxFlat_dfn1v")
+max_value = 1.0
+value = 1.0
+show_percentage = false

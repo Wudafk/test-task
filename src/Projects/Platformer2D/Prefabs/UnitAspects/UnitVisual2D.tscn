@@ -1,0 +1,131 @@
+[gd_scene load_steps=21 format=3 uid="uid://cnbr84mw5royv"]
+
+[ext_resource type="Texture2D" uid="uid://wklnulgpedny" path="res://src/Projects/Platformer2D/assets/gbot/gBot_arm_l.png" id="1_3npkn"]
+[ext_resource type="Texture2D" uid="uid://dja88reow40nk" path="res://src/Projects/Platformer2D/assets/gbot/gBot_arm_r.png" id="2_vq0b2"]
+[ext_resource type="Texture2D" uid="uid://bmfnhp4iyffhh" path="res://src/Projects/Platformer2D/assets/gbot/gBot_body.png" id="3_1bngl"]
+[ext_resource type="Texture2D" uid="uid://eakqalrqi8v2" path="res://src/Projects/Platformer2D/assets/gbot/gBot_complete.png" id="4_7usd3"]
+[ext_resource type="Texture2D" uid="uid://d1aee6g066f2p" path="res://src/Projects/Platformer2D/assets/gbot/gBot_foot_l.png" id="5_tv62j"]
+[ext_resource type="Texture2D" uid="uid://bea20bdq547ec" path="res://src/Projects/Platformer2D/assets/gbot/gBot_foot_r.png" id="6_abs83"]
+[ext_resource type="Texture2D" uid="uid://bjswtavlxavnj" path="res://src/Projects/Platformer2D/assets/gbot/gBot_forearm_l.png" id="7_tnwrw"]
+[ext_resource type="Texture2D" uid="uid://ddxne48xsehjn" path="res://src/Projects/Platformer2D/assets/gbot/gBot_forearm_r.png" id="8_bj8ca"]
+[ext_resource type="Texture2D" uid="uid://cpfphq7l2bfym" path="res://src/Projects/Platformer2D/assets/gbot/gBot_head.png" id="9_xwowf"]
+[ext_resource type="Texture2D" uid="uid://4412ubrwr7yc" path="res://src/Projects/Platformer2D/assets/gbot/gBot_hip.png" id="10_fpo7e"]
+[ext_resource type="Texture2D" uid="uid://dwtedmelxtr5" path="res://src/Projects/Platformer2D/assets/gbot/gBot_jaw.png" id="11_rbsmb"]
+[ext_resource type="Texture2D" uid="uid://cm2n5jox8amru" path="res://src/Projects/Platformer2D/assets/gbot/gBot_leg_l.png" id="12_2uq8p"]
+[ext_resource type="Texture2D" uid="uid://dn75va2uvlst0" path="res://src/Projects/Platformer2D/assets/gbot/gBot_leg_r.png" id="13_umk6x"]
+[ext_resource type="Texture2D" uid="uid://750jh4wd0nb2" path="res://src/Projects/Platformer2D/assets/gbot/gBot_shin_l.png" id="14_sii3q"]
+[ext_resource type="Texture2D" uid="uid://c1cjbx2g12ctw" path="res://src/Projects/Platformer2D/assets/gbot/gBot_shin_r.png" id="15_alw2e"]
+[ext_resource type="Script" uid="uid://xre0o7ra7k16" path="res://addons/Wudafk/DI/DIContainer.gd" id="70_caml3"]
+[ext_resource type="Script" uid="uid://c8hpybox2cmxb" path="res://addons/Wudafk/Gameplay/Attack/ArcDamageAreaData.gd" id="72_dxjue"]
+[ext_resource type="Script" uid="uid://bqq2jv8hqrqbk" path="res://addons/Wudafk/Gameplay/Attack/ArcData.gd" id="73_hmca4"]
+[ext_resource type="Script" uid="uid://w1x2bes72fvg" path="res://src/Projects/Platformer2D/Entities/Unit/UnitInputActionHandler2D.gd" id="74_rh5jm"]
+
+[sub_resource type="Resource" id="Resource_bu5gi"]
+script = ExtResource("73_hmca4")
+arcRadius = 55.0
+arcAngleStartDeg = 10.0
+arcAngleEndDeg = -70.0
+metadata/_custom_type_script = "uid://bqq2jv8hqrqbk"
+
+[node name="Visual" type="Node2D"]
+
+[node name="UnitModel" type="Node2D" parent="."]
+
+[node name="Node" type="Node2D" parent="UnitModel"]
+
+[node name="Skeleton2D" type="Skeleton2D" parent="UnitModel/Node"]
+
+[node name="Node2D" type="Node2D" parent="UnitModel/Node/Skeleton2D"]
+scale = Vector2(0.055, 0.055)
+
+[node name="GBotArmL" type="Sprite2D" parent="UnitModel/Node/Skeleton2D/Node2D"]
+visible = false
+position = Vector2(8, -129)
+texture = ExtResource("1_3npkn")
+
+[node name="GBotArmR" type="Sprite2D" parent="UnitModel/Node/Skeleton2D/Node2D"]
+visible = false
+position = Vector2(8, -129)
+texture = ExtResource("2_vq0b2")
+
+[node name="GBotBody" type="Sprite2D" parent="UnitModel/Node/Skeleton2D/Node2D"]
+visible = false
+position = Vector2(8, -129)
+texture = ExtResource("3_1bngl")
+
+[node name="GBotComplete" type="Sprite2D" parent="UnitModel/Node/Skeleton2D/Node2D"]
+position = Vector2(8, -429)
+texture = ExtResource("4_7usd3")
+
+[node name="GBotFootL" type="Sprite2D" parent="UnitModel/Node/Skeleton2D/Node2D"]
+visible = false
+position = Vector2(8, -129)
+texture = ExtResource("5_tv62j")
+
+[node name="GBotFootR" type="Sprite2D" parent="UnitModel/Node/Skeleton2D/Node2D"]
+visible = false
+position = Vector2(8, -129)
+texture = ExtResource("6_abs83")
+
+[node name="GBotForearmL" type="Sprite2D" parent="UnitModel/Node/Skeleton2D/Node2D"]
+visible = false
+position = Vector2(8, -129)
+texture = ExtResource("7_tnwrw")
+
+[node name="GBotForearmR" type="Sprite2D" parent="UnitModel/Node/Skeleton2D/Node2D"]
+visible = false
+position = Vector2(8, -129)
+texture = ExtResource("8_bj8ca")
+
+[node name="GBotHead" type="Sprite2D" parent="UnitModel/Node/Skeleton2D/Node2D"]
+visible = false
+position = Vector2(8, -129)
+texture = ExtResource("9_xwowf")
+
+[node name="GBotHip" type="Sprite2D" parent="UnitModel/Node/Skeleton2D/Node2D"]
+visible = false
+position = Vector2(8, -129)
+texture = ExtResource("10_fpo7e")
+
+[node name="GBotJaw" type="Sprite2D" parent="UnitModel/Node/Skeleton2D/Node2D"]
+visible = false
+position = Vector2(8, -129)
+texture = ExtResource("11_rbsmb")
+
+[node name="GBotLegL" type="Sprite2D" parent="UnitModel/Node/Skeleton2D/Node2D"]
+visible = false
+position = Vector2(8, -129)
+texture = ExtResource("12_2uq8p")
+
+[node name="GBotLegR" type="Sprite2D" parent="UnitModel/Node/Skeleton2D/Node2D"]
+visible = false
+position = Vector2(8, -129)
+texture = ExtResource("13_umk6x")
+
+[node name="GBotShinL" type="Sprite2D" parent="UnitModel/Node/Skeleton2D/Node2D"]
+visible = false
+position = Vector2(8, -129)
+texture = ExtResource("14_sii3q")
+
+[node name="GBotShinR" type="Sprite2D" parent="UnitModel/Node/Skeleton2D/Node2D"]
+visible = false
+position = Vector2(8, -129)
+texture = ExtResource("15_alw2e")
+
+[node name="DIContainer" type="Node" parent="UnitModel" node_paths=PackedStringArray("_instances")]
+script = ExtResource("70_caml3")
+isDebug = true
+_instances = [null, null, NodePath("../MotionReader"), NodePath("../ArcDamageAreaData")]
+
+[node name="MotionReader" type="Node" parent="UnitModel"]
+
+[node name="ArcDamageAreaData" type="Node2D" parent="UnitModel"]
+script = ExtResource("72_dxjue")
+arcData = SubResource("Resource_bu5gi")
+
+[node name="DIContainer" type="Node" parent="." node_paths=PackedStringArray("_instances")]
+script = ExtResource("70_caml3")
+_instances = [NodePath("../UnitModel"), NodePath("../UnitInputActionHandler")]
+
+[node name="UnitInputActionHandler" type="Node" parent="."]
+script = ExtResource("74_rh5jm")

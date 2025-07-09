@@ -1,0 +1,68 @@
+[gd_scene load_steps=16 format=3 uid="uid://d0cx87hcgp6ng"]
+
+[ext_resource type="Script" uid="uid://xre0o7ra7k16" path="res://addons/Wudafk/DI/DIContainer.gd" id="1_mc01x"]
+[ext_resource type="Script" uid="uid://dg66fg6gpw40a" path="res://addons/Wudafk/Gameplay/multiplayer/Entities/Unit/UnitModelProvider.gd" id="2_k5uw6"]
+[ext_resource type="Script" uid="uid://dxcouilhifp4l" path="res://addons/Wudafk/Gameplay/multiplayer/Entities/Unit/UnitInputProvider.gd" id="3_6gvfn"]
+[ext_resource type="Script" uid="uid://bu41oisjkcvnt" path="res://addons/Wudafk/Gameplay/multiplayer/Entities/Unit/UnitRootProvider.gd" id="4_3come"]
+[ext_resource type="Script" uid="uid://bvjv2ons4ympl" path="res://addons/Wudafk/Gameplay/multiplayer/Entities/Entity/PlayerInput.gd" id="6_mbva2"]
+[ext_resource type="Script" uid="uid://q0bktlogvd7c" path="res://addons/Wudafk/Gameplay/multiplayer/Entities/Unit/UnitSystemData.gd" id="8_avq7y"]
+[ext_resource type="Script" uid="uid://ffnkjo1lx1u4" path="res://addons/Wudafk/Gameplay/multiplayer/Entities/Unit/Network/UnitNetworkData.gd" id="9_pn634"]
+[ext_resource type="Script" uid="uid://byrgwv2o7hstx" path="res://addons/netfox.extras/state-machine/rewindable-state-machine.gd" id="9_vmunt"]
+[ext_resource type="Script" uid="uid://hp53dgamfiny" path="res://src/Projects/Platformer2D/Entities/Unit/States/SystemPoolState2D.gd" id="10_rm57o"]
+[ext_resource type="Script" uid="uid://bnu1ic1rg1uhj" path="res://src/Projects/Platformer2D/Entities/Unit/States/IdleState2D.gd" id="11_762tk"]
+[ext_resource type="Script" uid="uid://52qhpdbuimqd" path="res://src/Projects/Platformer2D/Entities/Unit/States/MovementState2D.gd" id="12_l23tp"]
+[ext_resource type="Script" uid="uid://c3k1atgly1vlq" path="res://src/Projects/Platformer2D/Entities/Unit/States/JumpState2D.gd" id="13_lfb7u"]
+[ext_resource type="Script" uid="uid://dic63mqbeh2fb" path="res://src/Projects/Platformer2D/Entities/Unit/States/FallState2D.gd" id="14_mc01x"]
+[ext_resource type="Script" uid="uid://dcwuxfl8a5cfk" path="res://src/Projects/Platformer2D/Entities/Unit/States/AttackState2D.gd" id="15_p7ke0"]
+[ext_resource type="Script" uid="uid://b6lamihv473om" path="res://src/Projects/Platformer2D/Entities/Unit/States/TeleportState2D.gd" id="16_mc01x"]
+
+[node name="Physics" type="Node2D"]
+
+[node name="DIContainer" type="Node" parent="." node_paths=PackedStringArray("_instances")]
+script = ExtResource("1_mc01x")
+_instances = [NodePath("UnitModelProvider"), NodePath("UnitInputProvider"), NodePath("UnitRootProvider"), NodePath("UnitInputData"), NodePath("UnitSystemData"), NodePath("../RewindableStateMachine"), NodePath("UnitNetworkData")]
+
+[node name="UnitModelProvider" type="Node" parent="DIContainer"]
+script = ExtResource("2_k5uw6")
+
+[node name="UnitInputProvider" type="Node" parent="DIContainer"]
+script = ExtResource("3_6gvfn")
+
+[node name="UnitRootProvider" type="Node" parent="DIContainer"]
+script = ExtResource("4_3come")
+
+[node name="UnitInputData" type="Node" parent="DIContainer"]
+script = ExtResource("6_mbva2")
+
+[node name="UnitSystemData" type="Node" parent="DIContainer"]
+script = ExtResource("8_avq7y")
+
+[node name="UnitNetworkData" type="Node" parent="DIContainer"]
+script = ExtResource("9_pn634")
+
+[node name="RewindableStateMachine" type="Node" parent="."]
+script = ExtResource("9_vmunt")
+
+[node name="SystemPoolState" type="Node" parent="RewindableStateMachine"]
+script = ExtResource("10_rm57o")
+animation_name = "Idle"
+
+[node name="IdleState" type="Node" parent="RewindableStateMachine"]
+script = ExtResource("11_762tk")
+
+[node name="MovementState" type="Node" parent="RewindableStateMachine"]
+script = ExtResource("12_l23tp")
+
+[node name="JumpState" type="Node" parent="RewindableStateMachine"]
+script = ExtResource("13_lfb7u")
+
+[node name="FallState" type="Node" parent="RewindableStateMachine"]
+script = ExtResource("14_mc01x")
+animation_name = "Fall"
+
+[node name="AttackState" type="Node" parent="RewindableStateMachine"]
+script = ExtResource("15_p7ke0")
+
+[node name="TeleportState" type="Node" parent="RewindableStateMachine"]
+script = ExtResource("16_mc01x")
+animation_name = "Idle"

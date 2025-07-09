@@ -1,0 +1,85 @@
+[gd_scene load_steps=16 format=3 uid="uid://bj8peb4bmjbyo"]
+
+[ext_resource type="Script" uid="uid://co0alsj6w7oab" path="res://addons/Wudafk/Gameplay/multiplayer/Entities/Unit/Hero.gd" id="1_cxf2g"]
+[ext_resource type="PackedScene" uid="uid://d0cx87hcgp6ng" path="res://src/Projects/Platformer2D/Prefabs/UnitAspects/UnitPhysics2D.tscn" id="2_m4jbg"]
+[ext_resource type="PackedScene" uid="uid://cnbr84mw5royv" path="res://src/Projects/Platformer2D/Prefabs/UnitAspects/UnitVisual2D.tscn" id="3_m6w64"]
+[ext_resource type="Script" uid="uid://bqv27nagqa6dj" path="res://addons/Wudafk/Gameplay/Debug/AttackArcDebugger2D.gd" id="4_yf751"]
+[ext_resource type="Script" uid="uid://xre0o7ra7k16" path="res://addons/Wudafk/DI/DIContainer.gd" id="5_ckivj"]
+[ext_resource type="Script" uid="uid://da541wuh325om" path="res://addons/Wudafk/Gameplay/Debug/TargetsShowerDebugger2D.gd" id="5_rfy6g"]
+[ext_resource type="Script" uid="uid://b1ltj5682x2vw" path="res://addons/Wudafk/Single/SingleRollbackSynchronizer.gd" id="12_unkai"]
+[ext_resource type="Script" uid="uid://dgq7bl53wpjik" path="res://addons/Wudafk/Gameplay/UnitDamageTaker.gd" id="12_v105d"]
+[ext_resource type="Script" uid="uid://bi0cklkxy6k7p" path="res://addons/Wudafk/Gameplay/UnitDamageDealer.gd" id="95_8i5xo"]
+[ext_resource type="Script" uid="uid://y3kb67tc8a8m" path="res://src/Projects/Platformer2D/Game/PlayerHeroGameOverDetector.gd" id="95_xmmwq"]
+[ext_resource type="PackedScene" uid="uid://oeobhot5jcek" path="res://src/Projects/Platformer2D/UI/GameOverPopupUI.tscn" id="96_4invj"]
+[ext_resource type="PackedScene" uid="uid://dg1lv5r7s55ad" path="res://src/Projects/Platformer2D/Prefabs/UnitAspects/UnitUI2D.tscn" id="98_lup35"]
+[ext_resource type="Script" uid="uid://6c8p17ajtki7" path="res://src/Projects/Platformer2D/Game/PlatformKillEventListener.gd" id="102_f5gp4"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ggtbe"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_by1jr"]
+
+[node name="Hero2D" type="CharacterBody2D"]
+collision_mask = 32769
+script = ExtResource("1_cxf2g")
+
+[node name="Physics" parent="." instance=ExtResource("2_m4jbg")]
+
+[node name="Visual" parent="." instance=ExtResource("3_m6w64")]
+
+[node name="DIContainer" parent="Visual/UnitModel" index="1" node_paths=PackedStringArray("_instances")]
+_instances = [null, null, NodePath("../MotionReader"), NodePath("../ArcDamageAreaData"), null]
+
+[node name="AttackDebug" type="Node2D" parent="Visual/UnitModel/ArcDamageAreaData" index="0"]
+
+[node name="AttackArcDebugger2D" type="Node2D" parent="Visual/UnitModel/ArcDamageAreaData/AttackDebug" node_paths=PackedStringArray("_arcDamageAreaData")]
+script = ExtResource("4_yf751")
+_arcDamageAreaData = NodePath("../..")
+arc_color = Color(0.880528, 0.000342498, 0.817132, 1)
+draw_in_game = true
+arc_line_thickness = 0.1
+metadata/_custom_type_script = "uid://bqv27nagqa6dj"
+
+[node name="TargetsShowerDebugger2D" type="Node2D" parent="Visual/UnitModel/ArcDamageAreaData/AttackDebug" node_paths=PackedStringArray("_arcDamageAreaData")]
+script = ExtResource("5_rfy6g")
+_arcDamageAreaData = NodePath("../..")
+draw_in_game = true
+hit_line_color = Color(0.804368, 0.885141, 1.15514e-06, 1)
+metadata/_custom_type_script = "uid://da541wuh325om"
+
+[node name="DIContainer" type="Node" parent="." node_paths=PackedStringArray("_instances")]
+script = ExtResource("5_ckivj")
+_isAddToParent = true
+_instances = [NodePath("../Physics"), NodePath("../Visual"), NodePath("../UnitDamageDealer"), NodePath("../UnitDamageTaker"), NodePath("../PlayerHeroGameOverDetector"), NodePath("../UnitUI"), NodePath("../PlatformKillEventListener"), NodePath("../SingleRollbackSynchronizer")]
+
+[node name="SingleRollbackSynchronizer" type="Node" parent="."]
+script = ExtResource("12_unkai")
+metadata/_custom_type_script = "uid://b1ltj5682x2vw"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -15)
+shape = SubResource("CapsuleShape2D_ggtbe")
+
+[node name="UnitDamageDealer" type="Node" parent="."]
+script = ExtResource("95_8i5xo")
+metadata/_custom_type_script = "uid://bi0cklkxy6k7p"
+
+[node name="UnitDamageTaker" type="Node" parent="."]
+script = ExtResource("12_v105d")
+metadata/_custom_type_script = "uid://dgq7bl53wpjik"
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_by1jr")
+
+[node name="PlayerHeroGameOverDetector" type="Node" parent="."]
+script = ExtResource("95_xmmwq")
+_gameOverPopupUIPrefab = ExtResource("96_4invj")
+metadata/_custom_type_script = "uid://y3kb67tc8a8m"
+
+[node name="UnitUI" parent="." instance=ExtResource("98_lup35")]
+position = Vector2(0, -80)
+
+[node name="PlatformKillEventListener" type="Node" parent="."]
+script = ExtResource("102_f5gp4")
+metadata/_custom_type_script = "uid://6c8p17ajtki7"
+
+[editable path="Visual"]

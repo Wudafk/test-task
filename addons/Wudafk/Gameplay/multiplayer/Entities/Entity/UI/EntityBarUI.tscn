@@ -1,0 +1,40 @@
+[gd_scene load_steps=5 format=3 uid="uid://daxd2ch5bdcnp"]
+
+[ext_resource type="Script" uid="uid://c0fla83yhssjv" path="res://addons/Wudafk/Gameplay/multiplayer/Entities/Entity/UI/EntityBarUI.gd" id="1_j8yfh"]
+[ext_resource type="PackedScene" uid="uid://1ydjiimutj4y" path="res://addons/Wudafk/Gameplay/multiplayer/Entities/UI/CompositionPrefabs/NameEntityBarUI.tscn" id="2_1ldue"]
+[ext_resource type="PackedScene" uid="uid://ekg3vibllue0" path="res://addons/Wudafk/Gameplay/multiplayer/Entities/UI/CompositionPrefabs/EntityHealthBarUI.tscn" id="3_7v0vh"]
+[ext_resource type="Script" uid="uid://xre0o7ra7k16" path="res://addons/Wudafk/DI/DIContainer.gd" id="4_u6yhm"]
+
+[node name="EntityBarUI" type="VBoxContainer" node_paths=PackedStringArray("entity_health_bar_ui", "hero_name_label")]
+offset_right = 50.0
+offset_bottom = 28.0
+theme_override_constants/separation = 0
+script = ExtResource("1_j8yfh")
+entity_health_bar_ui = NodePath("CenterContainer/VBoxContainer/EntityHealthBarUI")
+hero_name_label = NodePath("NameEntityBarUI/HeroNameLabel")
+
+[node name="NameEntityBarUI" parent="." instance=ExtResource("2_1ldue")]
+layout_mode = 2
+
+[node name="HeroNameLabel" parent="NameEntityBarUI" index="0"]
+text = "EntityName"
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+clip_contents = true
+custom_minimum_size = Vector2(50, 8)
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="EntityHealthBarUI" parent="CenterContainer/VBoxContainer" instance=ExtResource("3_7v0vh")]
+custom_minimum_size = Vector2(0, 5)
+layout_mode = 2
+
+[node name="DIContainer" type="Node" parent="." node_paths=PackedStringArray("_instances")]
+script = ExtResource("4_u6yhm")
+_instances = [NodePath("../NameEntityBarUI"), NodePath("../CenterContainer/VBoxContainer/EntityHealthBarUI")]
+metadata/_custom_type_script = "uid://xre0o7ra7k16"
+
+[editable path="NameEntityBarUI"]

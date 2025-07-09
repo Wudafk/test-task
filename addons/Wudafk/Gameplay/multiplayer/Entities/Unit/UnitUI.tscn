@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://bcpjnjpogjj3a"]
+
+[ext_resource type="Script" uid="uid://xre0o7ra7k16" path="res://addons/Wudafk/DI/DIContainer.gd" id="2_4a1s0"]
+[ext_resource type="PackedScene" uid="uid://d2v4dj4swc4lk" path="res://addons/Wudafk/Gameplay/multiplayer/Entities/Entity/UI/EntityBarUI3D.tscn" id="3_pgq7m"]
+
+[node name="UnitUI" type="Node3D"]
+
+[node name="DIContainer" type="Node" parent="." node_paths=PackedStringArray("_instances")]
+script = ExtResource("2_4a1s0")
+_instances = [NodePath("../EnemyEntityBarUI3D")]
+
+[node name="EnemyEntityBarUI3D" parent="." instance=ExtResource("3_pgq7m")]
