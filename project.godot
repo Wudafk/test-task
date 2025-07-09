@@ -11,6 +11,7 @@ config_version=5
 [application]
 
 config/name="TestTaskPlatform2D"
+run/main_scene="uid://dxgajt5ydsxxi"
 config/features=PackedStringArray("4.4", "Forward Plus")
 boot_splash/image="uid://ds0rsxwfjigwp"
 config/icon="uid://2qof52pkqvt7"
@@ -22,6 +23,9 @@ NetworkTimeSynchronizer="*res://addons/netfox/network-time-synchronizer.gd"
 NetworkRollback="*res://addons/netfox/rollback/network-rollback.gd"
 NetworkEvents="*res://addons/netfox/network-events.gd"
 NetworkPerformance="*res://addons/netfox/network-performance.gd"
+WindowTiler="*res://addons/netfox.extras/window-tiler.gd"
+Noray="*res://addons/netfox.noray/noray.gd"
+PacketHandshake="*res://addons/netfox.noray/packet-handshake.gd"
 
 [display]
 
